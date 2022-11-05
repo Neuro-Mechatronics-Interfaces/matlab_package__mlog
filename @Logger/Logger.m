@@ -38,7 +38,7 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
     properties (AbortSet)
 
         % Name of this logger (each unique name has a singleton logger)
-        Name (1,1) string = "Advanced Logger for MATLAB"
+        Name (1,1) string = "main"
 
         % Location to store log files
         LogFolder (1,1) string = strip(tempdir,'right',filesep)
@@ -47,7 +47,7 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
         LogFile (1,1) string
 
         % Period of when to rotate to a new log file ("none" produces a single file)
-        RotationPeriod (1,1) mlog.RotationPeriod = mlog.RotationPeriod.none
+        RotationPeriod (1,1) mlog.RotationPeriod = mlog.RotationPeriod.day
 
         % Level of messages to save to the log file
         FileThreshold (1,1) mlog.Level = mlog.Level.INFO
@@ -158,8 +158,8 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
 
             % Define input arguments
             arguments
-                name (1,1) string = "Advanced_Logger_for_MATLAB"
-                pathName (1,1) string = "" %File or folder path
+                name (1,1) string = "main"
+                pathName (1,1) string = fullfile(pwd, "logs") %File or folder path
             end
 
             % Logger is a singleton by Name. Only a single logger for each
@@ -197,7 +197,7 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
             % Define input arguments
             arguments
                 obj (1,1) mlog.Logger
-                name (1,1) string = "Advanced_Logger_for_MATLAB"
+                name (1,1) string = "main"
             end
 
             % Track a singleton logger for each unique name

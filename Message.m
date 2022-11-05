@@ -33,7 +33,7 @@ classdef Message < event.EventData & matlab.mixin.CustomDisplay
             % Construct the message
             
             obj.Time = datetime('now','TimeZone','local');
-            obj.Time.Format = 'uuuu-MM-dd HH:mm:ss';
+            obj.Time.Format = 'uuuu-MM-dd HH:mm:ss.SSS';
             
         end %function
         
@@ -132,7 +132,7 @@ classdef Message < event.EventData & matlab.mixin.CustomDisplay
             % sense if one wanted to import the log as a delimited text
             % format.
             
-            str = sprintf("%-8s %s", obj.Level, obj.Text);
+            str = sprintf(" :: %-8s :: %s", obj.Level, obj.Text);
             
         end %function
         
@@ -142,7 +142,7 @@ classdef Message < event.EventData & matlab.mixin.CustomDisplay
             
             % The default log file message is simply the time plus the
             % standard display message
-            str = sprintf('%s %s',...
+            str = sprintf('%s%s',...
                 string(obj.Time),...
                 obj.createDisplayMessage() );
             
