@@ -169,9 +169,16 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
             obj = getSingletonLogger(obj,name);
 
             % Was a folder or file name provided?
-            if isfolder(pathName)
+            if strlength(pathName) == 0
+                return;
+            end
+            [~, ~, e] = fileparts(pathName);
+            if isempty(e)
+                if exist(pathName, 'dir') == 0
+                    mkdir(pathName);
+                end
                 obj.LogFolder = pathName;
-            elseif strlength(pathName)
+            else
                 obj.LogFile = pathName;
             end
 
