@@ -173,7 +173,7 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
                 return;
             end
             [~, ~, e] = fileparts(pathName);
-            if isempty(e)
+            if strlength(e) == 0
                 if exist(pathName, 'dir') == 0
                     mkdir(pathName);
                 end
