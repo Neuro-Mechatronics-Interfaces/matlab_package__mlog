@@ -41,7 +41,7 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
         Name (1,1) string = "main"
 
         % Location to store log files
-        LogFolder (1,1) string = strip(tempdir,'right',filesep)
+        LogFolder (1,1) string = fullfile(pwd,'logs');
 
         % Full path for log file
         LogFile (1,1) string
@@ -59,7 +59,7 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
         MessageReceivedEventThreshold (1,1) mlog.Level = mlog.Level.MESSAGE
 
         % Number of messages to retain
-        BufferSize (1,1) uint32 {mustBePositive} = 1000
+        BufferSize (1,1) uint32 {mustBePositive} = 64000
 
     end %properties
 
@@ -98,7 +98,7 @@ classdef Logger < handle & matlab.mixin.SetGetExactNames & ...
     properties (Access = protected)
 
         % Circular buffer of log messages
-        MessageBuffer (:,1) mlog.Message = repmat(mlog.Message, 1000, 1)
+        MessageBuffer (:,1) mlog.Message = repmat(mlog.Message, 64000, 1)
 
         % Index of last message in buffer
         BufferIndex (1,1) double = 0

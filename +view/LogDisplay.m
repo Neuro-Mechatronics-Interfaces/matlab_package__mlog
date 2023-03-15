@@ -146,6 +146,14 @@ classdef LogDisplay < matlab.ui.componentcontainer.ComponentContainer
     %% Get/Set Methods
     methods
 
+        function delete(obj)
+            try %#ok<TRYNC> 
+                for ii = 1:numel(obj.LogListener)
+                    delete(obj.LogListener(ii));
+                end
+            end
+        end
+
         function value = get.LogName(obj)
             if isempty(obj.Log) || ~isvalid(obj.Log)
                 value = "";
